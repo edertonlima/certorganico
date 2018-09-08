@@ -1,0 +1,104 @@
+.como-funciona {
+	.item-como-funciona {
+		margin-top: 60px;
+
+		&:first-child {
+			margin-top: 0px;
+		}
+	}
+
+	.img-item {
+		float: left;
+		width: 115px;
+	}
+
+	.content-text {
+		display: block;
+		padding: 0 0 0 165px;
+		clear: none;
+
+		h4 {
+			text-transform: none;
+		}
+	}
+}
+
+.clientes {
+	text-align: center;
+
+	li {
+		margin: 5px 0;
+	}
+
+	a {
+		&:hover {
+			h4 {
+				color: $verde-claro;
+			}
+		}
+	}
+
+	h4 {
+		display: inline-block;
+		padding: 5px 0;
+		text-align: center;
+		font-size: 1.225rem;
+		@include animacao;
+	}
+}
+
+.documentos {
+	.item-documentos {
+		position: relative;
+		margin-top: 40px;
+		padding-bottom: 40px;
+		border-bottom: 1px solid $verde-claro;
+
+		&:first-child {
+			margin-top: 0px;
+		}
+
+		&:last-child {
+			border: none;
+			padding-bottom: 0;
+		}
+	}
+
+	.img-item {
+		position: absolute;
+		right: 0;
+		top: 17px;
+	}
+
+	.content-text {
+		display: block;
+		padding: 0 165px 0 0;
+		clear: none;
+
+		h4 {
+			text-transform: none;
+		}
+	}
+
+	a {
+		&:hover {
+			opacity: .8;
+		}
+	}
+
+	&.documentos-restrito {
+		margin-bottom: 70px;
+	}
+}
+
+.vertical-align {
+	.col-5 {
+		display: table;
+		height: 3500px;
+
+		p {
+			display: table-cell;
+			vertical-align: middle;
+		}
+	}
+}

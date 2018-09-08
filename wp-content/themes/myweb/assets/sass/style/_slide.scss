@@ -1,0 +1,179 @@
+.slide {
+	height: $hSlide;
+	
+	.item {
+		width: 100%;
+		height: $hSlide;
+		background-position: center;
+		background-size: cover;
+		line-height: $hSlide;
+
+		&.video {
+			video {
+				min-width: 100%;
+				min-height: 100%;
+			}
+		}
+
+		.box-height {
+			display: table;
+			width: 100%;
+			height: $hSlide;
+			line-height: $hSlide;
+			//background-color: rgba($verde, .8);
+		}
+
+		.box-texto {
+			display: table-cell;
+			vertical-align: middle;
+
+			img {
+				display: block;
+				max-width: 130px;
+				margin: 0 auto;
+			}
+
+			h2 {
+
+			}
+
+			p {
+				color: $verde;
+				display: block;
+				padding: 0 50px;
+				//text-shadow: 1px 1px 1px #000;
+
+				&.texto {
+					font-size: 1.365rem;
+					line-height: 1.75rem;
+					font-weight: $bold;
+
+					background-color: rgba(#fff,.8);
+					margin-right: 10%;
+					padding: 40px 5% 40px 40px;
+					float: right;
+					width: 80%;
+					max-width: 540px;
+					@include box-sizing;
+
+					&.category-name {
+						font-weight: $light;
+						text-transform: uppercase;
+					}
+				}
+
+				&.sub-texto {
+					margin-top: 15px;
+					font-size: 1.3625rem;
+					line-height: 1.3625rem;
+					font-weight: $light;
+				}
+
+				@media all and (max-width: 750px){
+					&.texto {
+						font-size: 1.5625rem;
+						line-height: 1.5625rem;
+					}
+
+					&.sub-texto {
+						font-size: 1.125rem;
+						line-height: 1.125rem;
+					}
+				}
+			}
+
+			@media all and (max-width: 1100px){
+				img {
+					max-width: 70px;
+				}
+
+				h2 {
+					line-height: 1.5rem;
+					font-size: 1.5rem;
+					margin-top: 10px;
+					margin-bottom: 10px;
+				}
+
+				p {
+					&.texto, &.sub-texto {
+						font-size: 1.255rem;
+						line-height: 1.255rem;
+						padding: 0 15px;
+					}
+				}
+			}
+		}
+	}
+
+	.controle-slide {
+		position: absolute;
+		top: 50%;
+		margin-top: -23px;
+		width: 100%;
+		z-index: 100;
+		display: none;
+
+		a {
+			height: 46px;
+			width: 25px;
+			position: relative;
+			z-index: 990;
+			@include animacao();
+
+			&:hover {
+				opacity: .5;
+			}
+
+			&.left {
+				left: 10%;
+				float: left;
+				background-image: url('../images/seta-slide-left.png');
+			}
+
+			&.right {
+				float: right;
+				right: 10%;
+				background-image: url('../images/seta-slide-right.png');
+			}
+
+			@media all and (max-width: 1300px){
+				&.left {
+					left: 5%;
+				}
+
+				&.right {
+					right: 5%;
+				}
+			}
+
+		}
+	}
+
+	.carousel-indicators {
+		position: absolute;
+		bottom: 10px;
+		left: 0;
+		width: 100%;
+		display: inline-block;
+		margin: 0;
+
+		li {
+			width: 15px;
+			height: 15px;
+			display: inline-block;
+			margin: 0 5px;
+			border: 2px solid $verde-claro;
+			background-color: $verde;
+			@include animacao;
+
+			&.active {
+				background-color: $verde-claro;
+				border: 2px solid $verde;
+			}
+
+			&:hover {
+				opacity: .75;
+			}
+		}
+	}
+}

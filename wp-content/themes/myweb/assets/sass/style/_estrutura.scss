@@ -1,0 +1,171 @@
+html {
+	font-size: 100%; 
+	width: 100%;
+	overflow-x: hidden;
+}
+
+body {
+	position: relative;
+	min-height: 100vh;
+	//min-width: $width;
+	padding-top: 72px;
+	@include box-sizing;
+}
+
+body * {
+	font-family: $font-family;
+	color: $cor-txt;
+	font-weight: $regular;
+}
+
+.container {
+	max-width: $width; 
+	width: 100%;
+	padding: 0 $padding-container;
+	margin: 0 auto;
+	position: relative;
+	@include box-sizing();
+	@include clear();
+
+	@media all and (max-width: 1000px){
+		padding-left: ($padding-container)/2;
+		padding-right: ($padding-container)/2;
+	}	
+
+	@media all and (max-width: 600px) {
+		padding-left: ($padding-container)/4;
+		padding-right: ($padding-container)/4;
+	}
+}
+
+.row {
+	display: block;
+	@include clear();
+
+	&:not(.no-padding){
+		margin-right: ($padding-col)*(-1);
+		margin-left: ($padding-col)*(-1);
+
+		[class*="col-"] {
+			padding-right: $padding-col; 
+			padding-left: $padding-col;
+		}
+	}
+
+	&.reduzido {
+		margin-right: -2.5px;
+		margin-left: -2.5px;
+
+		[class*="col-"] {
+			padding-right: 2.5px; 
+			padding-left: 2.5px;
+		}
+	}
+
+	&.no-padding {
+		margin: 0;
+	}
+
+	[class*="col-"] {
+		float: left;
+		@include box-sizing;
+
+		img {
+			max-width: 100%;
+		}
+	}
+
+	@for $i from 1 through 12 {
+		.col-#{$i} {
+			width: $i*(100%/12);
+		}
+	}
+
+	@for $i from 1 through 12 {
+		.col-m-#{$i} {
+			margin-left: $i*(100%/12);
+		}
+	}
+
+	.col-4:nth-child(3n+1) {
+		@include clear;
+	}
+
+	.col-clear {
+		@include clear;
+	}
+}
+
+.box-content {
+	@include clear;
+	width: 100%;
+	position: relative;
+	padding: 70px 0;
+
+	&.no-padding {
+		padding: 0;
+	}
+
+	&.no-padding-top {
+		padding-top: 0;
+	}
+
+	&.no-padding-bottom {
+		padding-bottom: 0;
+	}
+
+	&.cinza {
+		background-color: $cinza;
+	}
+
+	&.azul {
+		background-color: $azul;
+
+		h2, p {
+			color: #ffffff;
+		}
+	}
+
+	.content-text {
+		padding-top: 60px;
+		@include clear;
+	}
+
+	&.item-servicos {
+		.content-text {
+			&:first-child {
+				padding-top: 0px;				
+			}
+		}
+	}
+}
+
+/* BORDAS */
+.border {
+	border-top: 5px solid $cinza-escuro;
+
+	&.border-bottom {
+		border-top: 0;
+		border-bottom: 5px solid $cinza-escuro;
+	}
+
+	&.border-verde {
+		border-color: $verde;
+	}
+
+	&.border-verde-claro {
+		border-color: $verde-claro;
+	}
+
+	&.border-verde-limao {
+		border-color: $verde-limao;
+	}
+}
+
+.mlright {
+	margin-right: (100%/12)*1;
+}
+
+.mlleft {
+	margin-left: (100%/12)*1;
+}

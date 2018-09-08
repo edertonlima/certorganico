@@ -1,0 +1,36 @@
+.noticia {
+	.list-noticia {
+		width: 100%;
+		margin-bottom: 30px;
+		padding-bottom: 30px;
+		border-bottom: 1px solid $verde-claro;
+		@include clear;
+
+		&:last-child {
+			border-bottom: 0;
+			margin-bottom: 0;
+		}
+
+		.col-6 {
+			&:first-child {
+				padding-left: 0;
+			}
+
+			&:last-child {
+				padding-right: 0;
+			}
+		}
+
+		h4 {
+			text-transform: none;
+			line-height: 1.5rem;
+		}
+	}	
+}
+
+.det-noticia {
+	h3 {
+		max-width: 80%;
+		margin: 0 auto;
+	}
+}

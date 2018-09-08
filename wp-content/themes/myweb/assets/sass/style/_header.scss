@@ -1,0 +1,24 @@
+.header {
+	height: 100px;
+	vertical-align: middle;
+	position: fixed;
+	width: 100%;
+	background-color: $verde-escuro;
+	z-index: 999;
+	top: 0;
+	text-align: center;
+	//@include animacao();
+
+	h1 {
+		display: inline-block;
+		vertical-align: middle;
+	}
+
+	&.scroll_menu {
+		h1 {
+			img {
+				max-height: 70px
+			}
+		}
+	}
+}

@@ -1,0 +1,265 @@
+strong {
+	font-weight: $bold;
+}
+
+h1 {
+	margin-top: 0px;
+	//max-width: $wLogo;
+	//width: 80%;
+	display: inline-block;
+	@include animacao();
+
+	a {
+		@include animacao();
+
+		img {
+			max-height: 100px;
+			//@include animacao;
+		}
+
+		&:hover {
+			opacity: .8;
+		}
+	}
+}
+
+h2 {
+	font-size: 3rem;
+	color: $cor-txt;
+	font-weight: $bold;
+	display: block;
+}
+
+h3 {
+	font-weight: $light;
+	font-size: 2rem;
+	line-height: 2rem;
+	display: block;
+	color: $cor-txt;
+}
+
+h4 {
+	font-weight: $bold;
+	font-size: 1.125rem;
+	line-height: 1.125rem;
+	padding: 20px 0;
+	text-transform: uppercase;
+	display: block;
+}
+
+h5 {
+
+}
+
+h6 {
+
+}
+
+p {
+	font-size: $font-size;
+	line-height: $font-size+.3;
+	font-weight: $regular;
+	margin-bottom: 20px;
+
+	&.mini {
+		font-size: 1rem;
+		line-height: 1.25rem;
+	}
+
+	&.destaque {
+		font-size: 1.5rem;
+		line-height: 1.8rem;
+		font-weight: $light;
+	}
+
+	&.destaque-mini {
+		font-size: .875rem;
+		line-height: 1rem;
+		max-width: 510px;
+		margin: 0 auto;
+	}
+
+	&.cinza {
+		color: darken($cinza-escuro, 10%);
+	}
+	
+	@media all and (max-width: 770px){
+		font-size: 1.25rem;
+		line-height: (1.25rem)+.5;
+	}
+
+	&:last-child {
+		margin-bottom: 0px;
+	}
+}
+
+.margin-top-30 {
+	margin-top: 30px;
+}
+
+.justify-center {
+	text-align: justify;  
+	-moz-text-align-last: center;
+	text-align-last: center;
+}
+
+.justify-left {
+	text-align: justify;  
+	-moz-text-align-last: left;
+	text-align-last: left;
+}
+
+.justify {
+	text-align: justify;  
+	text-justify: inter-word;
+}
+
+.center {
+	text-align: center;
+	display: block;
+}
+
+.right {
+	text-align: right;
+	display: block;
+}
+
+.no-margim {
+	margin: 0!important;
+}
+
+img {
+	&.center {
+		margin: 0px auto;
+		display: block;
+	}
+
+	&.img-top-50 {
+		margin-top: 50px;
+	}
+}
+
+a {
+	text-decoration: none;
+	@include animacao;
+
+	&:hover {
+		text-decoration: none;		
+	}
+
+	&.btn-inline {
+		display: inline-block;
+		font-weight: $bold;
+		font-size: 1rem;
+		margin-top: 20px;
+		color: $verde;
+
+		.fas {
+			@include animacao;
+			margin-right: 5px;
+		}
+
+		.fas {
+			color: $verde;
+
+			&.circle {
+				border-radius: 50%;
+				border: 1px solid $verde;
+				text-align: center;
+				width: 30px;
+				height: 30px;
+				line-height: 28px;
+			}
+		}
+
+		&:hover {
+			color: $verde-claro;
+
+			.fas {
+				color: $verde-claro;
+
+				&.circle {
+					border-color: $verde-claro;
+				}
+			}
+		}
+
+		&.verde-claro {
+			color: $verde-claro;
+
+			.fas {
+				color: $verde-claro;
+
+				&.circle {
+					border-color: $verde-claro;
+				}
+			}
+
+			&:hover {
+				color: $verde;
+
+				.fas {
+					color: $verde;
+
+					&.circle {
+						border-color: $verde;
+					}
+				}
+			}
+		}
+	}
+}
+
+.paginacao {
+margin: 50px auto 0;
+text-align: center;
+
+	li {
+		display: inline-block;
+		margin: 0px;
+
+		span, a {
+			display: block;
+			font-size: 1.225rem;
+			font-weight: $regular;
+			line-height: 40px;
+			height: 40px;
+			padding: 0 10px;
+		}
+
+		a {
+			color: $verde;
+			@include animacao;
+
+			.fa {
+				font-size: 1.225rem;
+				font-weight: $regular;
+				color: $verde;
+			}
+
+			&:hover {
+				background-color: rgba($verde, .5);
+			}
+		}
+
+		span {
+			background-color: $verde;
+			color: #ffffff;
+		}
+	}
+}
+
+.ico-texto {
+	display: block;
+	margin: 0 auto 15px;
+	@include clear;
+}
+
+/* CORES */
+.verde {
+	color: $verde;
+}
+
+.verde-claro {
+	color: $verde-claro;
+}

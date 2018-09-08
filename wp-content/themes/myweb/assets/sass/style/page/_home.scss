@@ -1,0 +1,15 @@
+.home {
+	.container {
+		//max-width: 1440px;
+	}
+}
+
+.como-funciona-home {
+	p {
+		margin-bottom: 5px;
+
+		&:nth-child(even) {
+			margin-bottom: 20px;
+		}
+	}
+}

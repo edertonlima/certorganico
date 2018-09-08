@@ -1,0 +1,99 @@
+.nav {
+	display: inline-block;
+	vertical-align: middle;
+	margin-left: 30px;
+	//@include animacao();
+
+	ul {
+		@include box-sizing;
+		line-height: 60px;
+		height: 60px;
+		position: relative;
+		top: -5px;
+
+		li {
+			float: left;
+			height: 60px;
+			border-right: 1px solid rgba(#fff,.5);
+			//@include animacao();
+
+			a {
+				color: #ffffff;
+				display: block;
+				line-height: 60px;
+				font-size: 1rem;
+				padding: 0 10px;
+				font-weight: $regular;
+				text-shadow: 1px 1px 1px darken($verde, 5%);
+				@include animacao();
+			}
+
+			&.idioma {
+				padding-left: 20px;
+			}
+
+			&.active, &.active:hover {
+				a {
+					color: $verde-limao;
+				}
+			}
+
+			&:hover {
+				a {
+					color: $verde-limao;
+				}
+			}
+
+			&:last-child {
+				border: 0;
+			}
+		}
+	}
+}
+
+.header {
+	&.scroll_menu {
+		height: 70px;
+
+		nav {
+			ul {
+				line-height: 34px;
+				height: 30px;
+
+				li {
+					height: 30px;
+
+					a {
+						line-height: 30px;
+						font-size: .8rem;
+					}
+				}
+			}
+		}
+	}
+}
+
+/* menu mobile */
+.menu-mobile {
+	color: #ffffff;
+	display: none;
+	z-index: 9999;
+	position: absolute;
+	cursor: pointer;
+	font-size: 2.5rem;
+	top: 28px;
+	right: 50px;
+	@include animacao;
+
+	&.active {
+		color: $verde-limao;
+
+		&:hover {
+			color: #ffffff;
+		}
+	}
+
+	&:hover {
+		color: $verde-limao;
+	}
+}
