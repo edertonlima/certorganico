@@ -2,6 +2,23 @@
 <html lang="pt-br">
 <head>
 
+<?php
+	/*global $idioma;
+	global $url_idioma;
+	$idioma = WPGlobus::Config()->language;
+	if($idioma == 'en'){
+		$url_idioma = explode('/en',home_url());
+		$url_idioma = $url_idioma[0];
+	}else{
+		if($idioma == 'es'){
+			$url_idioma = explode('/es',home_url());
+			$url_idioma = $url_idioma[0];
+		}else{
+			$url_idioma = home_url();
+		}
+	}*/
+?>
+
 <?php 
 	$titulo_princ = get_field('titulo', 'option');
 	$descricao_princ = get_field('descricao', 'option');
@@ -175,51 +192,107 @@ type="text/javascript";e.parentNode.insertBefore($,e)})(document,"script");
 			<nav class="nav">
 				<ul class="menu-principal">
 					<li class="<?php if(is_page('quem-somos')){ echo 'active'; } ?>">
-						<a href="<?php echo get_permalink(get_page_by_path('quem-somos')); ?>" title="Quem Somos">
-							Quem Somos
+						<a href="<?php echo get_permalink(get_page_by_path('quem-somos')); ?>" title="<?php echo get_the_title(icl_object_id( get_page_by_path('quem-somos')->ID, 'post', false, false ));  ?>">
+							<?php echo get_the_title(icl_object_id( get_page_by_path('quem-somos')->ID, 'post', false, false ));  ?>
 						</a>
 					</li>
 
 					<li class="<?php if(is_page('servicos')){ echo 'active'; } ?>">
-						<a href="<?php echo get_permalink(get_page_by_path('servicos')); ?>" title="Serviços">
-							Serviços
+						<a href="<?php echo get_permalink(get_page_by_path('servicos')); ?>" title="<?php echo get_the_title(icl_object_id( get_page_by_path('servicos')->ID, 'post', false, false ));  ?>">
+							<?php echo get_the_title(icl_object_id( get_page_by_path('servicos')->ID, 'post', false, false ));  ?>
 						</a>
 					</li>
 
 					<li class="<?php if(is_page('como-funciona')){ echo 'active'; } ?>">
-						<a href="<?php echo get_permalink(get_page_by_path('como-funciona')); ?>" title="Como Funciona">
-							Como Funciona
+						<a href="<?php echo get_permalink(get_page_by_path('como-funciona')); ?>" title="<?php echo get_the_title(icl_object_id( get_page_by_path('como-funciona')->ID, 'post', false, false ));  ?>">
+							<?php echo get_the_title(icl_object_id( get_page_by_path('como-funciona')->ID, 'post', false, false ));  ?>
 						</a>
 					</li>
 
 					<li class="<?php if(is_page('clientes')){ echo 'active'; } ?>">
-						<a href="<?php echo get_permalink(get_page_by_path('clientes')); ?>" title="Clientes">
-							Clientes
+						<a href="<?php echo get_permalink(get_page_by_path('clientes')); ?>" title="<?php echo get_the_title(icl_object_id( get_page_by_path('clientes')->ID, 'post', false, false ));  ?>">
+							<?php echo get_the_title(icl_object_id( get_page_by_path('clientes')->ID, 'post', false, false ));  ?>
 						</a>
 					</li>
 
 					<li class="<?php if(is_page('documentos')){ echo 'active'; } ?>">
-						<a href="<?php echo get_permalink(get_page_by_path('documentos')); ?>" title="Documentos">
-							Documentos
+						<a href="<?php echo get_permalink(get_page_by_path('documentos')); ?>" title="<?php echo get_the_title(icl_object_id( get_page_by_path('documentos')->ID, 'post', false, false ));  ?>">
+							<?php echo get_the_title(icl_object_id( get_page_by_path('documentos')->ID, 'post', false, false ));  ?>
 						</a>
 					</li>
 
 					<li class="<?php if((is_category('noticias')) or (is_single())){ echo 'active'; } ?>">
-						<a href="<?php echo get_home_url(); ?>/noticias" title="Notícias">
-							Notícias
+							<?php
+								$categories = get_terms( 'category', array(
+								    'orderby'    => 'count',
+								    'hide_empty' => 0,
+								    'slug' => 'noticias',
+								) );
+							?>
+						<a href="<?php echo get_home_url(); ?>noticias" title="<?php echo $categories[0]->name; ?>">
+							<?php echo $categories[0]->name; ?>
 						</a>
 					</li>
 
 					<li>
-						<a href="#contato" title="Contato">
-							Contato
+						<a href="#contato" title="<?php echo get_the_title(icl_object_id( get_page_by_path('contato')->ID, 'post', false, false ));  ?>">
+							<?php echo get_the_title(icl_object_id( get_page_by_path('contato')->ID, 'post', false, false ));  ?>
 						</a>
 					</li>
 
-					<li class="idioma active">
-						<a href="javascript:" title="PT">
-							PT
+					<li class="idioma submenu active">
+						<?php 
+							$langs = icl_get_languages('skip_missing=0&orderby=KEY&order=DIR&link_empty_to=str');
+
+							foreach ($langs as $key => $idioma) {
+								if($idioma['active']){ ?>
+
+										<a href="<?php echo $idioma['url']; ?>" title="<?php echo $idioma['native_name']; ?>">
+											<?php echo $idioma['native_name']; ?>
+										</a>
+
+								<?php }
+
+							}
+						?>
+
+						<ul>
+							
+							<?php 
+								foreach ($langs as $key => $idioma) {
+									//var_dump($idioma);
+
+									if(!$idioma['active']){ ?>
+
+										<li>
+											<a href="<?php echo $idioma['url']; ?>" title="<?php echo $idioma['native_name']; ?>">
+												<?php echo $idioma['native_name']; ?>
+											</a>
+										</li>
+
+									<?php }
+
+								}
+							?>
+
+						</ul>
+					</li>
+
+					<li class="area-restrita <?php if(isset($_SESSION['id'])){ echo 'submenu'; } ?>">
+						<a href="javascript:" title="Área Restrita" class="btn-login">
+							<img src="<?php echo get_template_directory_uri(); ?>/assets/images/ico_restrita.png">
 						</a>
+
+						<?php if(isset($_SESSION['id'])){ ?>
+							<ul>
+								<li>
+									<form action="<?php echo get_permalink(get_page_by_path('documentos')); ?>" method="post">
+										<input type="hidden" name="logout" value="true">
+										<button type="submit">SAIR</button>
+									</form>
+								</li>
+							</ul>
+						<?php } ?>
 					</li>
 				</ul>
 			</nav>

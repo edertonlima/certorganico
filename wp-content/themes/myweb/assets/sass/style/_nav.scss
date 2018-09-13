@@ -32,20 +32,129 @@
 				padding-left: 20px;
 			}
 
-			&.active, &.active:hover {
+			&.area-restrita {
 				a {
-					color: $verde-limao;
+					display: table;
+
+					img {
+						vertical-align: middle;
+						position: relative;
+						top: 0px;
+						@include animacao();
+					}
+
+					&:hover {
+						img {
+							opacity: .8;
+						}
+					}
+				}
+
+				ul {
+					margin-left: -50px;
+					top: 60px;
+
+					li {
+						line-height: 60px;
+						height: 60px;
+						width: 100%;
+						text-align: center;
+
+						button {
+							display: inline-block;
+							background: no-repeat;
+							color: #fff;
+							background: none;
+
+							&:hover {
+								color: $verde;
+							}
+						}
+					}
+				}
+			}
+
+			&.active, &.active:hover {
+				> a {
+					color: $verde-claro;
 				}
 			}
 
 			&:hover {
-				a {
-					color: $verde-limao;
+				> a {
+					color: $verde-claro;
 				}
 			}
 
 			&:last-child {
 				border: 0;
+			}
+		}
+	}
+
+	.submenu {
+		position: relative;
+
+		ul {
+			display: none;
+			position: absolute;
+			top: 50px;
+			left: 50%;
+			width: 100px;
+			background-color: $verde-claro;
+
+			font-family: 'Font Awesome 5 Free';
+			font-weight: 900;
+			font-style: normal;
+			font-variant: normal;
+			text-rendering: auto;
+			line-height: 1;
+
+			&:before {
+				content: "\f0d8";
+				position: absolute;
+				top: -13px;
+				color: $verde-claro;
+				left: 50%;
+				font-size: 20px;
+				margin-left: -7px;
+			}
+
+			li {
+				border: 0;
+				height: 50px;
+
+				a {
+					line-height: 50px;
+					text-shadow: none;
+				}
+
+				&:hover {
+					a {
+						color: $verde;
+					}
+				}
+			}
+		}
+
+		&.idioma {
+			border: 0;
+
+			ul {
+				width: 100px;
+				height: 50px;
+				margin-left: -40px;
+
+				li {
+					display: inline-block;
+					float: none;
+				}
+			}
+		}
+
+		&:hover {
+			ul {
+				display: block;
 			}
 		}
 	}
@@ -66,6 +175,43 @@
 					a {
 						line-height: 30px;
 						font-size: .8rem;
+					}
+
+					&.submenu {
+						ul {
+							top: 34px;
+							height: 35px;
+							width: 90px;
+							margin-left: -35px;
+
+							li {
+								a {
+									padding: 0 5px;
+								}
+							}
+
+							&:before {
+								top: -20px;
+							}
+						}
+					}
+
+					&.area-restrita {
+						a {
+							img {
+								top: 0;
+							}
+						}
+
+						ul {
+							margin-left: -43px;
+							top: 45px;
+
+							li {
+								line-height: 35px;
+								height: 35px;
+							}
+						}
 					}
 				}
 			}
@@ -95,5 +241,55 @@
 
 	&:hover {
 		color: $verde-limao;
+	}
+}
+
+
+
+.login-mask {
+	height: 100vh;
+	width: 100%;
+	background-color: rgba(#000,.75);
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 99999;
+	display: none;
+	@include animacao;
+
+	#login {
+		vertical-align: middle;
+		display: table-cell;
+
+		fieldset {
+			display: block;
+			width: 90%;
+			max-width: 400px;
+			margin: 0 auto;
+			background-color: #ffffff;
+			padding: 40px;
+			position: relative;
+			@include box-sizing();
+
+			h3 {
+				color: $verde;
+				margin-bottom: 20px;
+				font-size: 1.75rem;
+			}
+
+			.close {
+				position: absolute;
+				top: -40px;
+				right: -50px;
+				font-size: 30px;
+				opacity: 1;
+				color: #fff;
+				@include animacao;
+
+				&:hover {
+					color: $verde-claro;
+				}
+			}
+		}
 	}
 }

@@ -137,12 +137,12 @@ function paginacao() {
 
 // NOVOS POST TYPES 
 
-	/* POST TYPE *
-	function products_post_type(){
-		register_post_type('products', array( 
+	/* POST TYPE */
+	function user_post_type(){
+		register_post_type('area-restrita', array( 
 			'labels'            =>  array(
-				'name'          =>      __('Produtos'),
-				'singular_name' =>      __('Produtos'),
+				'name'          =>      __('Área Restrita'),
+				'singular_name' =>      __('Área Restrita'),
 				'all_items'     =>      __('Todos'),
 				'add_new'       =>      __('Adicionar'),
 				'add_new_item'  =>      __('Adicionar'),
@@ -160,44 +160,18 @@ function paginacao() {
 			'capability_type'   =>  'post',
 			'hierarchical'      =>  true,
 			'rewrite'=> [
-				'slug' => 'products',
+				'slug' => 'area-restrita',
 				"with_front" => false
 			],
-			"cptp_permalink_structure" => "/%products_taxonomy%/%postname%/",
+			"cptp_permalink_structure" => "/%area-restrita%/%postname%/",
 			'menu_position'     =>  21,
-			'supports'          =>  array('title','editor','excerpt','thumbnail'),
-			'has_archive'       =>  true,
-			'menu_icon' => 'dashicons-tag'
+			'supports'          =>  array('title'),
+			'has_archive'       =>  false,
+			'menu_icon' => 'dashicons-lock'
 		));
 		flush_rewrite_rules();
 	}
-	add_action('init', 'products_post_type');
-	function products_taxonomy() {  
-		register_taxonomy(  
-			'products_taxonomy',  
-			'products',        
-			array(
-				'label' => __( 'Categorias' ),
-				'rewrite'=> [
-					'slug' => 'products',
-					"with_front" => false
-				],
-				"cptp_permalink_structure" => "/%products_taxonomy%/",
-				'hierarchical'               => true,
-				'public'                     => true,
-				'show_ui'                    => true,
-				'show_admin_column'          => true,
-				'show_in_nav_menus'          => true,
-				'query_var' => true
-			) 
-		);  
-	}  
-	add_action( 'init', 'products_taxonomy');
-
-	add_action( 'init', 'gp_register_taxonomy_for_object_type' );
-	function gp_register_taxonomy_for_object_type() {
-		register_taxonomy_for_object_type( 'post_tag', 'products' );
-	};
+	add_action('init', 'user_post_type');
 	/* POST TYPE */
 
 

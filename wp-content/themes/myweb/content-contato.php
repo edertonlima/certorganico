@@ -3,8 +3,8 @@
 		
 		<div class="row">
 			<div class="col-12">
-				<h2 class="verde center">Contato</h2>
-				<h3 class="verde center">Escreva suas dúvidas ou agende uma visita</h3>
+				<h2 class="verde center"><?php echo get_the_title(icl_object_id( get_page_by_path('contato')->ID, 'post', false, false ));  ?></h2>
+				<h3 class="verde center"><?php the_field('subtitulo',icl_object_id( get_page_by_path('contato')->ID, 'post', false, false )); ?></h3>
 
 				<?php 
 					//$contact = get_page_by_path('contact'); 
@@ -14,35 +14,51 @@
 
 			<div class="col-6">
 				<div class="content-text right txt-contato">
-					<h3><strong>Equipe CertOrgânico</strong></h3>
-					<h3 class="verde">contato@certotganico.com.br</h3>
-					<h3 class="verde">+55 (48) 99669-5539</h3>
-					<h3>Florianópolis - SC - Brasil</h3>
+					<h3><strong><?php the_field('contato_responsavel','option'); ?></strong></h3>
+					<h3 class="verde"><?php the_field('email','option'); ?></h3>
+					<h3 class="verde"><?php the_field('telefone','option'); ?></h3>
+					<h3<?php the_field('endereco','option'); ?></h3>
 				</div>
 			</div>
+
+			<?php 
+
+				switch (ICL_LANGUAGE_CODE) {
+					case 'pt-br':
+						$form_contato = array('Nome:*','E-mail:*','Telefone:*','Mensagem:*','Enviar');
+					break;
+					case 'en':
+						$form_contato = array('Name:*','Email:*','Phone:*','Message:*','Send');
+					break;
+					case 'es':
+						$form_contato = array('Nombre:*','E-mail:*','Teléfono:*','Mensaje:*','Enviar');
+					break;
+				}
+
+			?>
 			
 			<div class="col-6">
 				<div class="form-contato">
 					<form action="javascript:" class="contato">
 						<fieldset>
-							<input type="text" name="nome" id="nome" placeholder="Nome:*">
+							<input type="text" name="nome" id="nome" placeholder="<?php echo $form_contato[0]; ?>">
 						</fieldset>
 
 						<fieldset>
-							<input type="text" name="email" id="email" placeholder="E-mail:*">
+							<input type="text" name="email" id="email" placeholder="<?php echo $form_contato[1]; ?>">
 						</fieldset>
 
 						<fieldset>
-							<input type="text" name="telefone" id="telefone" placeholder="Telefone:*">
+							<input type="text" name="telefone" id="telefone" placeholder="<?php echo $form_contato[2]; ?>">
 						</fieldset>
 
 						<fieldset>
-							<textarea name="mensagem" id="mensagem" placeholder="Mensagem:*"></textarea>
+							<textarea name="mensagem" id="mensagem" placeholder="<?php echo $form_contato[3]; ?>"></textarea>
 						</fieldset>
 
 						<fieldset class="center">
 							<p class="msg-form"></p>
-							<button class="button enviar">Enviar</button>
+							<button class="button enviar"><?php echo $form_contato[4]; ?></button>
 						</fieldset>
 					</form>						
 				</div>

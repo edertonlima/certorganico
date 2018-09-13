@@ -59,136 +59,25 @@
 	</div>
 </section>
 
-<?php /*if(get_field('titulo_chamada_home',get_page_by_path('contact'))){ ?>
-	<section class="box-content">
-		<div class="container">
-			
-			<div class="row">
-				<div class="col-8">
-					<p class="destaque"><?php the_field('titulo_chamada_home',get_page_by_path('contact')); ?></p>
-				</div>
-				<div class="col-4">
-					<a href="<?php echo get_permalink(get_page_by_path('contact')); ?>" class="button contato-home">Contact us</a>
-				</div>
-			</div>
-
-		</div>
-	</section>
-<?php } ?>
-
-<section class="box-content azul">
-	<div class="container">
-		
-		<div class="row">
-			<div class="col-12">
-				<h2><?php echo get_the_title(get_page_by_path('company')); ?></h2>
-				<p class="destaque-mini"><?php echo get_the_excerpt(get_page_by_path('company')); ?></p>
-
-				<?php if(get_field('img_home',get_page_by_path('company'))){ ?>
-					<img src="<?php the_field('img_home',get_page_by_path('company')); ?>" class="center img-top-50">
-				<?php } ?>
-			</div>
-		</div>
-
-	</div>
-</section>
-
-<section class="box-content">
-	<div class="container">
-		
-		<div class="row">
-			<div class="col-12">
-				<h2>Products</h2>
-			</div>
-
-			<div class="list-produtos">
-
-				<?php
-					$qtd_prod = 0;
-					$args = array(
-					    'taxonomy'      => 'products_taxonomy',
-					    'parent'        => 0,
-					    'orderby'       => 'name',
-					    'order'         => 'ASC',
-					    'hierarchical'  => 1,
-					    'pad_counts'    => 0
-					);
-					$categories = get_categories( $args );
-					foreach ( $categories as $categoria ){
-
-						$field_cat = 'products_taxonomy_'.$categoria->term_taxonomy_id; ?>
-
-						<a href="<?php echo get_term_link($categoria->term_id); ?>" class="col-6">
-							<img src="<?php the_field('img_categoria', $field_cat); ?>" class="center">
-							<h4><?php echo $categoria->name; ?></h4>
-							<p class="justify-left"><?php echo $categoria->description; ?></p>
-						</a>
-
-					<?php }
-				?>
-
-			</div>
-		</div>
-
-	</div>
-</section>
-
-
-<?php 
-	$markets = get_terms( array(
-	    'taxonomy' => 'post_tag',
-	    'hide_empty' => true,
-	) );
-
-	if(count($markets)){ ?>
-
-		<section class="box-content verde" id="markets">
-			<div class="container">
-				
-				<div class="row">
-					<div class="col-12">
-						<h2>Markets</h2>
-						<ul class="list-markets">
-
-
-							<?php //var_dump($markets);
-
-							foreach ( $markets as $market ){ 
-								$field_tag = 'post_tag_'.$market->term_taxonomy_id; ?>
-								<li>
-									<img src="<?php the_field('icone',$field_tag); ?>">
-									<a href="<?php echo get_category_link( $market->term_id ); ?>" title="<?php echo $market->name; ?>"><?php echo $market->name; ?></a></li>
-							<?php } ?>
-
-						</ul>
-					</div>
-				</div>
-
-			</div>
-		</section>
-
-	<?php } */
-?>
-
 
 <?php get_template_part( 'content-quem-somos' ); ?>
 
 
-<?php if( have_rows('servicos',get_page_by_path('servicos')->ID) ): ?>
+<?php if( have_rows('servicos',icl_object_id( get_page_by_path('servicos')->ID, 'post', false, false )) ): ?>
 	<section class="box-content border border-verde-claro">
 		<div class="container">
 			
 			<div class="row">
 				<div class="col-12">
-					<h2 class="verde-claro center"><?php echo get_the_title(get_page_by_path('servicos')->ID); ?></h2>
-					<h3 class="verde-claro center"><?php the_field('subtitulo',get_page_by_path('servicos')->ID); ?></h3>
+					<h2 class="verde-claro center"><?php echo get_the_title(icl_object_id( get_page_by_path('servicos')->ID, 'post', false, false )); ?></h2>
+					<h3 class="verde-claro center"><?php the_field('subtitulo',icl_object_id( get_page_by_path('servicos')->ID, 'post', false, false )); ?></h3>
 				</div>
 
 				<div class="content-text">
 					<div class="col-5 mlleft">
 
-						<?php if( have_rows('servicos',get_page_by_path('servicos')->ID) ):
-							while ( have_rows('servicos',get_page_by_path('servicos')->ID) ) : the_row(); ?>
+						<?php if( have_rows('servicos',icl_object_id( get_page_by_path('servicos')->ID, 'post', false, false )) ):
+							while ( have_rows('servicos',icl_object_id( get_page_by_path('servicos')->ID, 'post', false, false )) ) : the_row(); ?>
 
 								<h4 class="verde-claro"><?php the_sub_field('titulo'); ?></h4>
 								<p><?php the_sub_field('resumo'); ?></p>
@@ -197,13 +86,16 @@
 						endif; ?>
 
 						<span class="center">
-							<a href="<?php echo get_permalink(get_page_by_path('servicos')); ?>" class="btn-inline mais-informacoes verde-claro" title="mais informações"><i class="fas fa-plus circle"></i> mais informações</a>
+							<a href="<?php echo get_permalink(get_page_by_path('servicos')); ?>" class="btn-inline mais-informacoes verde-claro" title="<?php if(ICL_LANGUAGE_CODE == 'pt'){ echo 'mais informações'; }else{ if(ICL_LANGUAGE_CODE == 'en'){ echo 'more information'; }else{ echo 'mas informaciones'; }} ?>">
+								<i class="fas fa-plus circle"></i> 
+								<?php if(ICL_LANGUAGE_CODE == 'pt'){ echo 'mais informações'; }else{ if(ICL_LANGUAGE_CODE == 'en'){ echo 'more information'; }else{ echo 'mas informaciones'; }} ?>
+							</a>
 						</span>
 					</div>
 
 					<div class="col-6">
-						<?php $imagem = wp_get_attachment_image_src( get_post_thumbnail_id(get_page_by_path('servicos')->ID), 'medium' ); ?>
-						<img src="<?php echo $imagem[0] ?>" alt="<?php echo get_the_title(get_page_by_path('servicos')->ID); ?>">
+						<?php $imagem = wp_get_attachment_image_src( get_post_thumbnail_id(icl_object_id( get_page_by_path('servicos')->ID, 'post', false, false )), 'medium' ); ?>
+						<img src="<?php echo $imagem[0] ?>" alt="<?php echo get_the_title(icl_object_id( get_page_by_path('servicos')->ID, 'post', false, false )); ?>">
 					</div>
 				</div>
 			</div>
@@ -212,23 +104,23 @@
 	</section>
 <?php endif; ?>
 
-<?php if( have_rows('como-funciona',get_page_by_path('como-funciona')->ID) ): ?>
+<?php if( have_rows('como-funciona',icl_object_id( get_page_by_path('como-funciona')->ID, 'post', false, false )) ): ?>
 	<section class="box-content cinza border border-verde como-funciona-home">
 		<div class="container">
 			
 			<div class="row">
 				<div class="col-12">
-					<h2 class="verde center"><?php echo get_the_title(get_page_by_path('como-funciona')->ID); ?></h2>
-					<h3 class="verde center"><?php the_field('subtitulo',get_page_by_path('como-funciona')->ID); ?></h3>
+					<h2 class="verde center"><?php echo get_the_title(icl_object_id( get_page_by_path('como-funciona')->ID, 'post', false, false )); ?></h2>
+					<h3 class="verde center"><?php the_field('subtitulo',icl_object_id( get_page_by_path('como-funciona')->ID, 'post', false, false )); ?></h3>
 				</div>
 			</div>
 
 				<div class="content-text">
 					<div class="col-10 mlleft mlright">
 
-						<?php if( have_rows('como-funciona',get_page_by_path('como-funciona')->ID) ):
+						<?php if( have_rows('como-funciona',icl_object_id( get_page_by_path('como-funciona')->ID, 'post', false, false )) ):
 							$count=0;
-							while ( have_rows('como-funciona',get_page_by_path('como-funciona')->ID) ) : the_row();
+							while ( have_rows('como-funciona',icl_object_id( get_page_by_path('como-funciona')->ID, 'post', false, false )) ) : the_row();
 								$count=$count+1; ?>
 
 									<p><strong><?php echo $count; ?>. <?php the_sub_field('titulo'); ?></strong></p>
@@ -240,7 +132,10 @@
 						endif; ?>
 
 						<span class="center">
-							<a href="<?php echo get_permalink(get_page_by_path('como-funciona')); ?>" class="btn-inline mais-informacoes" title="mais informações"><i class="fas fa-plus circle"></i> mais informações</a>
+							<a href="<?php echo get_permalink(get_page_by_path('como-funciona')); ?>" class="btn-inline mais-informacoes" title="<?php if(ICL_LANGUAGE_CODE == 'pt'){ echo 'mais informações'; }else{ if(ICL_LANGUAGE_CODE == 'en'){ echo 'more information'; }else{ echo 'mas informaciones'; }} ?>">
+								<i class="fas fa-plus circle"></i> 
+								<?php if(ICL_LANGUAGE_CODE == 'pt'){ echo 'mais informações'; }else{ if(ICL_LANGUAGE_CODE == 'en'){ echo 'more information'; }else{ echo 'mas informaciones'; }} ?>
+							</a>
 						</span>
 					</div>
 				</div>

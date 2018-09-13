@@ -6,7 +6,10 @@
 		<h4 class="verde"><?php the_title(); ?></h4>
 		<?php the_excerpt(); ?>
 		<span class="center">
-			<a href="<?php echo get_permalink(); ?>" class="btn-inline mais-informacoes" title="leia mais"><i class="fas fa-plus circle"></i> leia mais</a>
+			<a href="<?php echo get_permalink(); ?>" class="btn-inline mais-informacoes" title="<?php if(ICL_LANGUAGE_CODE == 'pt'){ echo 'leia mais'; }else{ if(ICL_LANGUAGE_CODE == 'en'){ echo 'read more'; }else{ echo 'lea mas'; }} ?>">
+				<i class="fas fa-plus circle"></i> 
+				<?php if(ICL_LANGUAGE_CODE == 'pt'){ echo 'leia mais'; }else{ if(ICL_LANGUAGE_CODE == 'en'){ echo 'read more'; }else{ echo 'lea mas'; }} ?>
+			</a>
 		</span>
 	</div>
 </article>

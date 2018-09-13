@@ -93,9 +93,9 @@
 				
 				<div class="row">
 
-					<?php if( have_rows('servicos',get_page_by_path('servicos')->ID) ):
+					<?php if( have_rows('servicos') ):
 						$count=0;
-						while ( have_rows('servicos',get_page_by_path('servicos')->ID) ) : the_row(); 
+						while ( have_rows('servicos') ) : the_row(); 
 							$count=$count+1;
 
 							if($count%2){ ?>

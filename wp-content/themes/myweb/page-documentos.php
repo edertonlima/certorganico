@@ -1,3 +1,70 @@
+<?php 
+	session_start();
+
+	if(!isset($_SESSION['id'])){ //echo '<br>não tem session';
+
+		if((isset($_POST['email-login'])) and ($_POST['senha-login'] != '')){ //echo '<br>login não é vazio';
+
+			$usuario = get_posts(array(
+				'numberposts'	=> 1,
+				'post_type'		=> 'area-restrita',
+				'meta_key'		=> 'email_arearestrita',
+				'meta_value'	=> $_POST['email-login']
+			));
+
+			if(count($usuario)){ //echo '<br>tem usuario';
+
+				//echo '<br>'.$usuario[0]->ID; 
+				//echo '<br>'.get_field('senha_arearestrita',$usuario[0]->ID);
+
+				if(get_field('senha_arearestrita',$usuario[0]->ID) == $_POST['senha-login']){
+					//echo "<br>senha OK";
+					$login = true;
+
+					session_cache_limiter('private');
+					$cache_limiter = session_cache_limiter();
+					session_cache_expire(10);
+					$cache_expire = session_cache_expire();
+
+					$_SESSION['email'] = $_POST['email-login'];
+					$_SESSION['senha'] = $_POST['email-login'];
+					$_SESSION['id'] = $usuario[0]->ID;
+
+				}else{
+					$login = false;
+				}
+
+				//echo '<br>logado';
+
+			}else{ //echo '<br> não tem usuario';
+				$login = false;
+			}
+
+		}else{ //echo '<br>não tem POST';
+			$login = false;
+		}
+
+	}else{
+		//echo '<br>tem session';
+		/*session_start();
+		unset($_SESSION['senha']);
+		unset($_SESSION['email']);
+		unset($_SESSION['id']);*/
+	}
+
+	if(isset($_POST['logout'])){
+		session_start();
+		unset($_SESSION['senha']);
+		unset($_SESSION['email']);
+		unset($_SESSION['id']);
+	}
+
+	if((!$login) and (!isset($_POST['logout']))){
+		$msg = '<p><strong class="verde">Não foi possivel entrar em sua área.</strong><br>Por favor, verifique seu nome de usuário e sua senha ou se o seu cadastro ainda não foi aprovado, você não conseguirá acessar a sua área.</p>';
+	}
+?>
+
+
 <?php get_header(); ?>
 
 	<!-- slide -->
@@ -88,46 +155,70 @@
 			</section>
 		<?php } ?>
 
-		<section class="box-content cinza documentos documentos-restrito">
-			<div class="container">
-				
-				<div class="row">
-					<div class="col-10 mlleft mlright">
+		<?php if(isset($_SESSION['id'])){ ?>
 
-						<h3 class="verde-claro">Documentos Restritos</h3>
+			<section class="box-content cinza documentos documentos-restrito">
+				<div class="container">
+					
+					<div class="row">
+						<div class="col-10 mlleft mlright">
 
-						<?php if( have_rows('documentos') ):
-							while ( have_rows('documentos') ) : the_row(); 
+							<h3 class="verde-claro"><?php if(ICL_LANGUAGE_CODE == 'pt-br'){ echo 'Documentos Restritos'; }else{ if(ICL_LANGUAGE_CODE == 'en'){ echo 'Restricted Documents'; }else{ echo 'Documentos restringidos'; }} ?></h3>
 
-								if(get_sub_field('restrito')){ ?>
+							<?php if( have_rows('documentos') ):
+								while ( have_rows('documentos') ) : the_row(); 
 
-									<div class="item-documentos">
-										<div class="content-text">
-											<h4 class="verde"><?php the_sub_field('titulo'); ?></h4>
-											<p><?php the_sub_field('texto'); ?></p>
+									if(get_sub_field('restrito')){ ?>
+
+										<div class="item-documentos">
+											<div class="content-text">
+												<h4 class="verde"><?php the_sub_field('titulo'); ?></h4>
+												<p><?php the_sub_field('texto'); ?></p>
+											</div>
+
+											<?php if(get_sub_field('arquivo')){ ?>
+												<a href="<?php the_sub_field('arquivo'); ?>" target="_blank" class="img-item" title="Download">
+													<img src="<?php echo get_template_directory_uri(); ?>/assets/images/documento-download.png" alt="Download">
+												</a>
+											<?php }else{ ?>
+												<a href="<?php the_sub_field('url'); ?>" target="_blank" class="img-item" title="Acessar">
+													<img src="<?php echo get_template_directory_uri(); ?>/assets/images/documento-link.png" alt="Acessar">
+												</a>
+											<?php } ?>
 										</div>
 
-										<?php if(get_sub_field('arquivo')){ ?>
-											<a href="<?php the_sub_field('arquivo'); ?>" target="_blank" class="img-item" title="Download">
-												<img src="<?php echo get_template_directory_uri(); ?>/assets/images/documento-download.png" alt="Download">
-											</a>
-										<?php }else{ ?>
-											<a href="<?php the_sub_field('url'); ?>" target="_blank" class="img-item" title="Acessar">
-												<img src="<?php echo get_template_directory_uri(); ?>/assets/images/documento-link.png" alt="Acessar">
-											</a>
-										<?php } ?>
-									</div>
+									<?php } ?>
 
-								<?php } ?>
+								<?php endwhile;
+							endif; ?>
 
-							<?php endwhile;
-						endif; ?>
+
+						</div>
+					</div>
+
+				</div>
+			</section>
+
+		<?php }else{
+
+			if($msg){ ?>
+
+				<section class="box-content cinza documentos documentos-restrito">
+					<div class="container">
+						
+						<div class="row">
+							<div class="col-10 mlleft mlright">
+
+								<?php echo $msg; ?>
+
+							</div>
+						</div>
 
 					</div>
-				</div>
+				</section>
+			<?php }
 
-			</div>
-		</section>
+		} ?>
 
 		<section class="box-content no-padding-top documentos">
 			<div class="container">

@@ -59,7 +59,30 @@
 		</div>
 	</section>
 
-	<?php get_template_part( 'content-quem-somos' ); ?>
+	<section class="box-content border <?php if(is_front_page()){ echo 'cinza'; } ?>">
+		<div class="container">
+			
+			<div class="row">
+				<div class="col-12">
+					<h2 class="center"><?php the_title(); ?></h2>
+					<h3 class="center"><?php the_field('subtitulo'); ?></h3>
+				</div>
+
+				<div class="content-text <?php if(!is_front_page()){ echo 'vertical-align'; } ?>">
+					<div class="col-6">
+						<?php $imagem = wp_get_attachment_image_src( get_post_thumbnail_id($id), 'medium' ); ?>
+						<img src="<?php echo $imagem[0] ?>" alt="<?php echo get_the_title(get_page_by_path('quem-somos')->ID); ?>">
+					</div>
+					<div class="col-5 mlright">
+						
+						<p><?php echo get_the_excerpt(); ?></p>
+
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</section>
 
 	<?php while ( have_posts() ) : the_post(); ?>
 
