@@ -78,7 +78,7 @@
 						</div>
 						<div class="col-5 mlright">
 							
-							<?php the_excerpt(); ?>
+							<p><?php echo nl2br(get_the_excerpt()); ?></p>
 
 						</div>
 					</div>

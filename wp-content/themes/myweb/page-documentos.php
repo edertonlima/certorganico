@@ -3,7 +3,7 @@
 
 	if(!isset($_SESSION['id'])){ //echo '<br>não tem session';
 
-		if((isset($_POST['email-login'])) and ($_POST['senha-login'] != '')){ //echo '<br>login não é vazio';
+		if(($_POST['email-login'] != '') and ($_POST['senha-login'] != '')){ //echo '<br>login não é vazio';
 
 			$usuario = get_posts(array(
 				'numberposts'	=> 1,
@@ -19,7 +19,6 @@
 
 				if(get_field('senha_arearestrita',$usuario[0]->ID) == $_POST['senha-login']){
 					//echo "<br>senha OK";
-					$login = true;
 
 					session_cache_limiter('private');
 					$cache_limiter = session_cache_limiter();
@@ -30,18 +29,21 @@
 					$_SESSION['senha'] = $_POST['email-login'];
 					$_SESSION['id'] = $usuario[0]->ID;
 
-				}else{
-					$login = false;
+					$msg = ' <form action="' . get_permalink(get_page_by_path('documentos')) . '" method="post"><p><strong class="verde">Bem vindo!</strong><br>Caso queria sair, <input type="hidden" name="logout" value="true"><button type="submit">clique aqui.</button></p></form>';
+
+				}else{ //echo '<br>ERRO SENHA';
+					$msg = '<p><strong class="verde">Não foi possivel entrar em sua área.</strong><br>Por favor, verifique seu nome de usuário e sua senha ou se o seu cadastro ainda não foi aprovado, você não conseguirá acessar a sua área.</p>';
 				}
 
 				//echo '<br>logado';
 
-			}else{ //echo '<br> não tem usuario';
-				$login = false;
+			}else{ //echo '<br> ERRO USUARIO';
+				$msg = '<p><strong class="verde">Não foi possivel entrar em sua área.</strong><br>Por favor, verifique seu nome de usuário e sua senha ou se o seu cadastro ainda não foi aprovado, você não conseguirá acessar a sua área.</p>';
 			}
 
-		}else{ //echo '<br>não tem POST';
-			$login = false;
+		}else{ //echo '<br>não USER NEM SENHA';
+			//$login = false;
+			$msg = '';
 		}
 
 	}else{
@@ -50,6 +52,8 @@
 		unset($_SESSION['senha']);
 		unset($_SESSION['email']);
 		unset($_SESSION['id']);*/
+
+		$msg = ' <form action="' . get_permalink(get_page_by_path('documentos')) . '" method="post"><p><strong class="verde">Bem vindo!</strong><br>Caso queria sair, <input type="hidden" name="logout" value="true"><button type="submit">clique aqui.</button></p></form>';
 	}
 
 	if(isset($_POST['logout'])){
@@ -57,10 +61,8 @@
 		unset($_SESSION['senha']);
 		unset($_SESSION['email']);
 		unset($_SESSION['id']);
-	}
 
-	if((!$login) and (!isset($_POST['logout']))){
-		$msg = '<p><strong class="verde">Não foi possivel entrar em sua área.</strong><br>Por favor, verifique seu nome de usuário e sua senha ou se o seu cadastro ainda não foi aprovado, você não conseguirá acessar a sua área.</p>';
+		$msg = '<p class="msg-documentos"><strong class="verde">Você saiu da área restrita!</strong><br>Caso queira entrar novamente, <a href="javascript:" title="clique aqui" class="btn-login">clique aqui.</a></p>';
 	}
 ?>
 
@@ -163,6 +165,9 @@
 					<div class="row">
 						<div class="col-10 mlleft mlright">
 
+							<div class="msg-documentos">
+								<?php echo $msg; ?>
+							</div>
 							<h3 class="verde-claro"><?php if(ICL_LANGUAGE_CODE == 'pt-br'){ echo 'Documentos Restritos'; }else{ if(ICL_LANGUAGE_CODE == 'en'){ echo 'Restricted Documents'; }else{ echo 'Documentos restringidos'; }} ?></h3>
 
 							<?php if( have_rows('documentos') ):
@@ -173,7 +178,7 @@
 										<div class="item-documentos">
 											<div class="content-text">
 												<h4 class="verde"><?php the_sub_field('titulo'); ?></h4>
-												<p><?php the_sub_field('texto'); ?></p>
+												<p><?php echo nl2br(get_sub_field('texto')); ?></p>
 											</div>
 
 											<?php if(get_sub_field('arquivo')){ ?>
@@ -201,7 +206,7 @@
 
 		<?php }else{
 
-			if($msg){ ?>
+			if($msg != ''){ ?>
 
 				<section class="box-content cinza documentos documentos-restrito">
 					<div class="container">
@@ -234,7 +239,7 @@
 									<div class="item-documentos">
 										<div class="content-text">
 											<h4 class="verde"><?php the_sub_field('titulo'); ?></h4>
-											<p><?php the_sub_field('texto'); ?></p>
+											<p><?php echo nl2br(get_sub_field('texto')); ?></p>
 										</div>
 
 										<?php if(get_sub_field('arquivo')){ ?>

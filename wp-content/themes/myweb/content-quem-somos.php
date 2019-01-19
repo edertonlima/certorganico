@@ -14,7 +14,7 @@
 				</div>
 				<div class="col-5 mlright">
 					
-					<p><?php echo get_the_excerpt(icl_object_id( get_page_by_path('quem-somos')->ID, 'post', false, false )); ?></p>
+					<p><?php echo nl2br(get_the_excerpt(icl_object_id( get_page_by_path('quem-somos')->ID, 'post', false, false ))); ?></p>
 
 					<?php if(is_front_page()){ ?>
 						<span class="center">

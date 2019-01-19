@@ -48,11 +48,39 @@
 }
 
 .documentos {
+	.msg-documentos {
+		form {
+			width: auto;
+			height: auto;
+			clear: none;
+			margin-bottom: 15px;
+
+			&:before, &:after {
+				display: none;
+			}
+		}
+
+		button, a {
+			display: inline;
+			padding: 0;
+			height: auto;
+			line-height: normal;
+			color: $verde;
+			text-decoration: underline;
+			@include animacao;
+
+			&:hover {
+				text-decoration: none;
+			}
+		}
+	}
+
 	.item-documentos {
 		position: relative;
 		margin-top: 40px;
 		padding-bottom: 40px;
 		border-bottom: 1px solid $verde-claro;
+		min-height: 150px;
 
 		&:first-child {
 			margin-top: 0px;

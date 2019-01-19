@@ -229,7 +229,7 @@ type="text/javascript";e.parentNode.insertBefore($,e)})(document,"script");
 								    'slug' => 'noticias',
 								) );
 							?>
-						<a href="<?php echo get_home_url(); ?>noticias" title="<?php echo $categories[0]->name; ?>">
+						<a href="<?php echo get_home_url(); ?>/noticias" title="<?php echo $categories[0]->name; ?>">
 							<?php echo $categories[0]->name; ?>
 						</a>
 					</li>

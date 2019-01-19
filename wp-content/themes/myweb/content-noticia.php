@@ -4,7 +4,7 @@
 	</div>
 	<div class="col-6">
 		<h4 class="verde"><?php the_title(); ?></h4>
-		<?php the_excerpt(); ?>
+		<p><?php echo nl2br(get_the_excerpt()); ?></p>
 		<span class="center">
 			<a href="<?php echo get_permalink(); ?>" class="btn-inline mais-informacoes" title="<?php if(ICL_LANGUAGE_CODE == 'pt'){ echo 'leia mais'; }else{ if(ICL_LANGUAGE_CODE == 'en'){ echo 'read more'; }else{ echo 'lea mas'; }} ?>">
 				<i class="fas fa-plus circle"></i> 
